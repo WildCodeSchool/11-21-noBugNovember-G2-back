@@ -30,7 +30,7 @@ Router.get("/read/favorites", (req, res) => {
 
 Router.put("/bookmark", (req, res) => {
   console.log("req BODY",req.body)
-  const sql = "SELECT f.id_article, f.id_member, m.id, m.name, m.avatar, a.id, a.url, a.year, a.week, a.description, a.likes, a.id FROM veille.favorite AS f INNER JOIN veille.articles AS a INNER JOIN veille.members AS m ON f.id_article = a.id AND a.id_users = m.id WHERE f.id_member=?";
+  const sql = "SELECT f.id_article, f.id_user, m.id, m.name, m.avatar, a.id, a.url, a.year, a.week, a.description, a.likes, a.id FROM favorite AS f INNER JOIN articles AS a INNER JOIN members AS m ON f.id_article = a.id AND a.id_users = m.id WHERE f.id_user=?";
   const values = [
     req.body.id_user
   ];
@@ -44,7 +44,7 @@ Router.put("/bookmark", (req, res) => {
 
 Router.post("/add", (req, res) => {
   console.log("req BODY",req.body)
-  const sql = "INSERT INTO veille.favorite (id_article, id_user) VALUES (?,?)";
+  const sql = "INSERT INTO favorite (id_article, id_user) VALUES (?,?)";
   const values = [
     req.body.id_article,
     req.body.id_user
@@ -59,7 +59,7 @@ Router.post("/add", (req, res) => {
 
 Router.delete("/delete", (req, res) => {
   console.log("req BODY",req.body)
-  const sql = "DELETE FROM favorite WHERE (`id` = '4');";
+  const sql = "DELETE FROM favorite WHERE id_member=? AND id_article=?";
   const values = [
     req.body.id_article,
     req.body.id_user
@@ -69,7 +69,7 @@ Router.delete("/delete", (req, res) => {
     if (err) throw err;
     return res.status(200).send(result);
   })
-  res.send("POST on favorite/add");
+  res.send("DELETE on favorite");
 })
 
 module.exports = Router;
