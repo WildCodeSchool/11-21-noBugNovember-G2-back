@@ -52,14 +52,14 @@ Router.post("/add", (req, res) => {
   
   connection.query(sql, values, (err, result) => {
     if (err) throw err;
-    return res.status(200).send(result);
+    return res.status(200);
   })
   res.send("POST on favorite/add");
 })
 
 Router.delete("/delete", (req, res) => {
   console.log("req BODY",req.body)
-  const sql = "DELETE FROM favorite WHERE id_member=? AND id_article=?";
+  const sql = "DELETE FROM favorite WHERE id_user=? AND id_article=?";
   const values = [
     req.body.id_article,
     req.body.id_user
@@ -67,7 +67,7 @@ Router.delete("/delete", (req, res) => {
   
   connection.query(sql, values, (err, result) => {
     if (err) throw err;
-    return res.status(200).send(result);
+    return res.status(200);
   })
   res.send("DELETE on favorite");
 })
