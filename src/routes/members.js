@@ -59,7 +59,7 @@ Router.put("/avatar/get", (req, res) => {
 })
 
 Router.put("/avatar/put", (req, res) => {
-  const sql = "UPDATE veille.members SET avatar=? WHERE id=?";
+  const sql = "UPDATE members SET avatar=? WHERE id=?";
   const values = [req.body.avatar, req.body.id];
   
   connection.query(sql, values, (err, result) => {

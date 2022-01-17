@@ -24,6 +24,7 @@ app.use("/comments", comments);
 app.use("/favorite", favorite);
 app.use("/members", members);
 
+//Récupération des méta-données
 app.use((req, res) => {
   res.header('Access-Control-Allow-Origin', '*')
   if (!req.query.url) return res.json({
