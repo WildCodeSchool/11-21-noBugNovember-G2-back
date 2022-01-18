@@ -1,10 +1,10 @@
-const cors = require("cors");
-const express = require('express');
-const morgan = require("morgan");
-const fetch = require("node-fetch");
-const bodyParser = require("body-parser");
-const cheerio = require('cheerio');
-
+const cors = require("cors")
+const express = require('express')
+const morgan = require("morgan")
+const fetch = require("node-fetch")
+const bodyParser = require("body-parser")
+const cheerio = require('cheerio')
+require("dotenv").config()
 
 const articles = require("./src/routes/articles.js");
 const comments = require("./src/routes/comments.js");
