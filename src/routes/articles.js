@@ -48,7 +48,7 @@ Router.get("/read/id", (req, res) => {
 })
 
 Router.get("/search/desc", (req,res) => {
-  const sql = "SELECT a.id, a. FROM articles AS a WHERE description LIKE ?";
+  const sql = "SELECT m.id, m.name, m.avatar, a.url, a.year, a.week, a.description, a.likes, a.id FROM members AS m INNER JOIN articles AS a ON m.id = a.id_users WHERE description LIKE ?";
   const value = '%'+req.body.desc+'%';
 
   connection.query(sql, value, (err, result) => {

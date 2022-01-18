@@ -51,7 +51,7 @@ app.use((req, res) => {
     })
 });
 
-app.get("/", (rep, res) => {
+app.get("/ironman", (rep, res) => {
   res.send("And I am Iron Man '/'")
 })
 
