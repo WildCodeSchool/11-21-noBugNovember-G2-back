@@ -26,7 +26,7 @@ Router.get("/read/id", (req, res) => {
   console.log("GET on Members ID");
 })
 
-Router.put("/connect", (req, res) => {
+Router.get("/connect", (req, res) => {
   const sql = "SELECT id,avatar FROM members WHERE name=? AND password=?";
   const values = [req.body.name, req.body.password];
 
@@ -47,7 +47,7 @@ Router.put("/rang", (req, res) => {
   console.log("PUT on Members Update Rang");
 })
 
-Router.put("/avatar/get", (req, res) => {
+Router.get("/avatar/get", (req, res) => {
   const sql = "SELECT avatar FROM members WHERE id=?";
   const values = [req.body.id];
   

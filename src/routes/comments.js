@@ -15,8 +15,8 @@ Router.get("/get", (req, res) => {
   console.log("GET on Articles");
 })
 
-Router.get("/likes", (req, res) => {
-  const sql = "UPDATE veille.comments SET likes=? WHERE id=?";
+Router.put("/likes", (req, res) => {
+  const sql = "UPDATE comments SET likes=? WHERE id=?";
   const values = [req.body.likes, req.body.id];
 
   connection.query(sql, values, (err, result) => {
@@ -29,7 +29,7 @@ Router.get("/likes", (req, res) => {
 /*
 Router.post("/add", (req, res) => {
   console.log("req BODY",req.body)
-  const sql = "INSERT INTO `veille`.`articles` (`id_article`, `id_user`) VALUES (?,?)";
+  const sql = "INSERT INTO articles (`id_article`, `id_user`) VALUES (?,?)";
   const values = [
     req.body.id_article,
     req.body.id_user

@@ -18,13 +18,6 @@ Router.get("/read", (req, res) => {
 })
 
 Router.get("/read/all", (req, res) => {
-  
-  const sql1 = "SELECT * FROM articles";
-  const sql2 = "SELECT id,name,avatar FROM members";
-
-  let articles;
-  let members;
-
   connection.query(
     "SELECT m.id, m.name, m.avatar, a.url, a.year, a.week, a.description, a.likes, a.id FROM veille.members AS m INNER JOIN veille.articles AS a ON m.id = a.id_users ORDER BY a.id desc", 
     (err, result) => {
@@ -69,9 +62,9 @@ Router.get("/search/date", (req, res) => {
   console.log("GET on Articles Search Date");
 })
 
-Router.get("/likes", (req, res) => {
-  const sql = "UPDATE veille.articles SET likes=? WHERE id=?";
-  const values = [req.body.likes, req.body.id];
+Router.put("/likes", (req, res) => {
+  const sql = "UPDATE articles SET likes=likes+1 WHERE id=?";
+  const values = [req.body.id];
 
   connection.query(sql, values, (err, result) => {
     if (err) throw err;
@@ -83,7 +76,7 @@ Router.get("/likes", (req, res) => {
 Router.post("/add", (req, res) => {
   console.log("req BODY",req.body)
 
-  const sql = "INSERT INTO veille.articles (`week`, `year`, `id_users`, `url`, `description`) VALUES (?,?,?,?,?)";
+  const sql = "INSERT INTO articles (`week`, `year`, `id_users`, `url`, `description`) VALUES (?,?,?,?,?)";
   const values = [
     req.body.week,
     req.body.year,
