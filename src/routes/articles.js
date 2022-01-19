@@ -1,5 +1,5 @@
 const express = require("express");
-const { send } = require("express/lib/response");
+// const { send } = require("express/lib/response");
 const connection = require("../helper/db.js");
 const Router = express.Router();
 
@@ -12,7 +12,7 @@ Router.get("/read", (req, res) => {
   
   connection.query(sql, (err, result) => {
     if (err) throw err;
-    return res.status(200).send(result);
+    return res.status(200).json(result);
   })
   console.log("GET on Articles/Read");
 })

@@ -26,7 +26,7 @@ Router.get("/read/id", (req, res) => {
   console.log("GET on Members ID");
 })
 
-Router.get("/connect", (req, res) => {
+Router.put("/connect", (req, res) => {
   const sql = "SELECT id,avatar FROM members WHERE name=? AND password=?";
   const values = [req.body.name, req.body.password];
 
