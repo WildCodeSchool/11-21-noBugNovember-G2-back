@@ -76,13 +76,14 @@ Router.put("/likes", (req, res) => {
 Router.post("/add", (req, res) => {
   console.log("req BODY",req.body)
 
-  const sql = "INSERT INTO articles (`week`, `year`, `id_users`, `url`, `description`) VALUES (?,?,?,?,?)";
+  const sql = "INSERT INTO articles (`week`, `year`, `id_users`, `url`, `description`, `likes`) VALUES (?,?,?,?,?,?)";
   const values = [
     req.body.week,
     req.body.year,
     req.body.id_users,
     req.body.url,
-    req.body.description
+    req.body.description,
+    req.body.likes
   ]
   
   connection.query(sql, values, (err, result) => {
