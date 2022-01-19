@@ -27,7 +27,7 @@ Router.get("/read/id", (req, res) => {
 })
 
 Router.put("/connect", (req, res) => {
-  const sql = "SELECT id,avatar FROM members WHERE name=? AND password=?";
+  const sql = "SELECT id,avatar,name FROM members WHERE name=? AND password=?";
   const values = [req.body.name, req.body.password];
 
   connection.query(sql, values, (err, result) => {
