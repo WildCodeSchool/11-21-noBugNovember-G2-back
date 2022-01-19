@@ -58,7 +58,7 @@ Router.get("/avatar/get", (req, res) => {
   console.log("GET on Members Avatar");
 })
 
-Router.put("/avatar/put", (req, res) => {
+Router.post("/avatar/update", (req, res) => {
   const sql = "UPDATE members SET avatar=? WHERE id=?";
   const values = [req.body.avatar, req.body.id];
   
