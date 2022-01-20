@@ -17,6 +17,18 @@ Router.get("/read", (req, res) => {
   console.log("GET on Articles/Read");
 })
 
+Router.post("/byuser", (req, res) => {
+  console.log(req.body)
+  const sql = "SELECT id,week,year,url,description FROM articles WHERE id_users=? ORDER by id desc";
+  const value = [req.body.id_users];
+
+  connection.query(sql, value, (err, result) => {
+    if (err) throw err;
+    return res.status(200).json(result);
+  })
+  console.log("POST on Articles/ByUser");
+})
+
 Router.get("/read/all", (req, res) => {
   connection.query(
     "SELECT m.id, m.name, m.avatar, a.url, a.year, a.week, a.description, a.likes, a.id FROM veille.members AS m INNER JOIN veille.articles AS a ON m.id = a.id_users ORDER BY a.id desc", 
@@ -91,6 +103,21 @@ Router.post("/add", (req, res) => {
     return res.status(200).send(result);
   })
   console.log("POST '/articles/add'")
+})
+
+Router.delete("/delete", (req, res) => {
+  console.log("req BODY",req.body)
+
+  const sql = "DELETE FROM favorite WHERE id=?";
+  const values = [
+    req.body.id
+  ]
+  
+  connection.query(sql, values, (err, result) => {
+    if (err) throw err;
+    return res.status(200).send(result);
+  })
+  console.log("DELETE '/articles/delete'")
 })
 
 module.exports = Router;
