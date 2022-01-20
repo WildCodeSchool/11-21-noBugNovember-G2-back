@@ -52,7 +52,7 @@ Router.get("/search/desc", (req,res) => {
 })
 
 Router.get("/search/date", (req, res) => {
-  const sql = "SELECT * FROM veille.articles WHERE year=? AND week=?";
+  const sql = "SELECT m.id, m.name, m.avatar, a.url, a.year, a.week, a.description, a.likes, a.id FROM veille.members AS m INNER JOIN veille.articles AS a ON m.id = a.id_users WHERE year=? AND week=? ORDER BY m.name";
   const values = [req.body.year, req.body.week]
   
   connection.query(sql, values, (err, result) => {
