@@ -11,6 +11,7 @@ const comments = require("./src/routes/comments.js");
 //const connection = require("./src/helper/db.js");
 const favorite = require("./src/routes/favorite.js");
 const members = require("./src/routes/members.js");
+const like = require("./src/routes/like.js")
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use("/articles", articles);
 app.use("/comments", comments);
 app.use("/favorite", favorite);
 app.use("/members", members);
+app.use("/like", like)
 
 //Récupération des méta-données
 app.use((req, res) => {

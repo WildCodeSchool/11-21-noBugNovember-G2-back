@@ -51,7 +51,7 @@ Router.get("/search/desc", (req,res) => {
   console.log("GET on Articles Search Desc");
 })
 
-Router.get("/search/date", (req, res) => {
+Router.put("/search/date", (req, res) => {
   const sql = "SELECT m.id, m.name, m.avatar, a.url, a.year, a.week, a.description, a.likes, a.id FROM veille.members AS m INNER JOIN veille.articles AS a ON m.id = a.id_users WHERE year=? AND week=? ORDER BY m.name";
   const values = [req.body.year, req.body.week]
   
