@@ -26,8 +26,18 @@ Router.get("/read/id", (req, res) => {
   console.log("GET on Members ID");
 })
 
+Router.put("/admin", (req, res) => {
+  const sql = "SELECT admin FROM members WHERE id=?";
+  const value = [req.body.id];
+
+  connection.query(sql, value, (err, result) => {
+    if  (err) throw err;
+    return res.status(200).send(result);
+  })
+})
+
 Router.put("/connect", (req, res) => {
-  const sql = "SELECT id,avatar,name FROM members WHERE name=? AND password=?";
+  const sql = "SELECT id,avatar,name,admin FROM members WHERE name=? AND password=?";
   const values = [req.body.name, req.body.password];
 
   connection.query(sql, values, (err, result) => {
@@ -69,20 +79,4 @@ Router.post("/avatar/update", (req, res) => {
   console.log("PUT on Members Update Avatar");
 })
 
-/*
-Router.post("/add", (req, res) => {
-  console.log("req BODY",req.body)
-  const sql = "INSERT INTO `veille`.`articles` (`id_article`, `id_user`) VALUES (?,?)";
-  const values = [
-    req.body.id_article,
-    req.body.id_user
-  ]
-  
-  connection.query(sql, values, (err, result) => {
-    if  (err) throw err;
-    return res.status(200).send(result);
-  })
-  // res.send("i am on GET '/recipe/show' ")
-})
-*/
 module.exports = Router;

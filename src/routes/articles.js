@@ -35,7 +35,17 @@ Router.get("/read/all", (req, res) => {
     (err, result) => {
     if (err) throw err;
     else {
-      console.log(result)
+      return res.status(200).send(result);
+    }
+    })
+})
+
+Router.get("/godmode/read", (req, res) => {
+  connection.query(
+    "SELECT m.id, m.name, a.url, a.year, a.week, a.description, a.id FROM members AS m INNER JOIN articles AS a ON m.id = a.id_users ORDER BY a.id desc", 
+    (err, result) => {
+    if (err) throw err;
+    else {
       return res.status(200).send(result);
     }
     })
@@ -86,8 +96,6 @@ Router.put("/likes", (req, res) => {
 })
 
 Router.post("/add", (req, res) => {
-  console.log("req BODY",req.body)
-
   const sql = "INSERT INTO articles (`week`, `year`, `id_users`, `url`, `description`, `likes`) VALUES (?,?,?,?,?,?)";
   const values = [
     req.body.week,
@@ -108,7 +116,7 @@ Router.post("/add", (req, res) => {
 Router.delete("/delete", (req, res) => {
   console.log("req BODY",req.body)
 
-  const sql = "DELETE FROM favorite WHERE id=?";
+  const sql = "DELETE FROM articles WHERE id=?";
   const values = [
     req.body.id
   ]
