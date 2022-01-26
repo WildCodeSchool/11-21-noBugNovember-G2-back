@@ -42,7 +42,11 @@ Router.put("/connect", (req, res) => {
 
   connection.query(sql, values, (err, result) => {
     if (err) throw err;
-    return res.status(200).send(result);
+    if (result.length === 0) {
+      res.sendStatus(404);
+    } else {
+      res.json(result);
+    }
   })
 })
 
